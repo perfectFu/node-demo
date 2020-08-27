@@ -125,8 +125,24 @@ router.post('/api/upload', async ctx => {
 	}
 })
 
+// 我的简历-片段保存
+router.post('/api/saveExperience', async ctx => {
+    const { baseInfo, workExperience } = ctx.request.body
+    const resume = mongo.col('resume')
+    let ret = await resume.insertOne({
+        baseInfo,
+        workExperience
+    })
+    ctx.body = {
+        code: 2000,
+        message: '简历更新成功',
+        data: {}
+    }
+
+})
+
+
+
 app.use(static(path.resolve(__dirname, '../web')))
-
 app.use(router.routes())
-
 app.listen(4001)
