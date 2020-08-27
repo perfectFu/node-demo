@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .avatar{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+    </style>
+    <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/index.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-upload
+        class="avatar-uploader"
+        action="/api/upload"
+        :show-file-list="false"
+        :on-success="handleAvatarSuccess"
+        :before-upload="beforeAvatarUpload">
+        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    imageUrl: ''
+                }
+            },
+            methods: {
+                beforeAvatarUpload(file) {
+                    
+                },
+                handleAvatarSuccess(res, file) {
+                    console.log(res)
+                    this.imageUrl = res.data.url
+                }
+            },
+        })
+    </script>
+</body>
+</html>
