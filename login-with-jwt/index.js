@@ -141,6 +141,30 @@ router.post('/api/saveExperience', async ctx => {
 
 })
 
+// 博客板块分类
+router.post('/api/blogCategory', async ctx => {
+    const { name } = ctx.request.body
+    const col = mongo.col('blogCategory')
+    let ret = await col.insertOne({
+        name
+    })
+    console.log('创建分类', JSON.stringify(ret))
+    ctx.body = {
+        code: 2000,
+        message: '创建成功',
+        data: {}
+    }
+})
+
+// 写博客文章
+router.post('/api/writeBlog', async ctx => {
+    const {  } = ctx.request.body
+    const col = mongo.col('blog')
+    let ret = await col.insertOne({
+        
+    })
+})
+
 
 
 app.use(static(path.resolve(__dirname, '../web')))
